@@ -1,0 +1,690 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="seguimiento_carga_anchaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="conductor">
+          <Key>
+            <PropertyRef Name="id_conductor" />
+          </Key>
+          <Property Name="id_conductor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="licencia" Type="nvarchar" MaxLength="20" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="consumo_combustible">
+          <Key>
+            <PropertyRef Name="id_consumo" />
+          </Key>
+          <Property Name="id_consumo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_monitoreo" Type="int" />
+          <Property Name="cantidad_litros" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="costo_total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_registro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="empresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_empresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="razon_social" Type="nvarchar" MaxLength="150" />
+          <Property Name="ruc" Type="nvarchar" MaxLength="20" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="200" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="incidencia">
+          <Key>
+            <PropertyRef Name="id_incidencia" />
+          </Key>
+          <Property Name="id_incidencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_monitoreo" Type="int" />
+          <Property Name="tipo" Type="nvarchar" MaxLength="50" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="200" />
+          <Property Name="fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="mantenimiento">
+          <Key>
+            <PropertyRef Name="id_mantenimiento" />
+          </Key>
+          <Property Name="id_mantenimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_vehiculo" Type="int" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="200" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="costo" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="monitoreo">
+          <Key>
+            <PropertyRef Name="id_monitoreo" />
+          </Key>
+          <Property Name="id_monitoreo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_vehiculo" Type="int" />
+          <Property Name="id_conductor" Type="int" />
+          <Property Name="id_ruta" Type="int" />
+          <Property Name="fecha_salida" Type="datetime" />
+          <Property Name="fecha_llegada" Type="datetime" />
+          <Property Name="estado" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="id_proveedor" />
+          </Key>
+          <Property Name="id_proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="ruc" Type="nvarchar" MaxLength="20" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="repuesto">
+          <Key>
+            <PropertyRef Name="id_repuesto" />
+          </Key>
+          <Property Name="id_repuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_proveedor" Type="int" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="stock" Type="int" />
+        </EntityType>
+        <EntityType Name="ruta">
+          <Key>
+            <PropertyRef Name="id_ruta" />
+          </Key>
+          <Property Name="id_ruta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="origen" Type="nvarchar" MaxLength="100" />
+          <Property Name="destino" Type="nvarchar" MaxLength="100" />
+          <Property Name="distancia_km" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="vehiculo">
+          <Key>
+            <PropertyRef Name="id_vehiculo" />
+          </Key>
+          <Property Name="id_vehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_empresa" Type="int" />
+          <Property Name="placa" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="marca" Type="nvarchar" MaxLength="50" />
+          <Property Name="modelo" Type="nvarchar" MaxLength="50" />
+          <Property Name="anio" Type="int" />
+          <Property Name="capacidad_toneladas" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <Association Name="FK__consumo_c__id_mo__47DBAE45">
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="0..1" />
+          <End Role="consumo_combustible" Type="Self.consumo_combustible" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monitoreo">
+              <PropertyRef Name="id_monitoreo" />
+            </Principal>
+            <Dependent Role="consumo_combustible">
+              <PropertyRef Name="id_monitoreo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__incidenci__id_mo__4BAC3F29">
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="0..1" />
+          <End Role="incidencia" Type="Self.incidencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monitoreo">
+              <PropertyRef Name="id_monitoreo" />
+            </Principal>
+            <Dependent Role="incidencia">
+              <PropertyRef Name="id_monitoreo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__mantenimi__id_ve__4E88ABD4">
+          <End Role="vehiculo" Type="Self.vehiculo" Multiplicity="0..1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehiculo">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__monitoreo__id_co__440B1D61">
+          <End Role="conductor" Type="Self.conductor" Multiplicity="0..1" />
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conductor">
+              <PropertyRef Name="id_conductor" />
+            </Principal>
+            <Dependent Role="monitoreo">
+              <PropertyRef Name="id_conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__monitoreo__id_ru__44FF419A">
+          <End Role="ruta" Type="Self.ruta" Multiplicity="0..1" />
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ruta">
+              <PropertyRef Name="id_ruta" />
+            </Principal>
+            <Dependent Role="monitoreo">
+              <PropertyRef Name="id_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__monitoreo__id_ve__4316F928">
+          <End Role="vehiculo" Type="Self.vehiculo" Multiplicity="0..1" />
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehiculo">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="monitoreo">
+              <PropertyRef Name="id_vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__repuesto__id_pro__5441852A">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
+          <End Role="repuesto" Type="Self.repuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="repuesto">
+              <PropertyRef Name="id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vehiculo__id_emp__3B75D760">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="vehiculo" Type="Self.vehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="vehiculo">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="seguimiento_carga_anchaModelStoreContainer">
+          <EntitySet Name="conductor" EntityType="Self.conductor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="consumo_combustible" EntityType="Self.consumo_combustible" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empresa" EntityType="Self.empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="incidencia" EntityType="Self.incidencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mantenimiento" EntityType="Self.mantenimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="monitoreo" EntityType="Self.monitoreo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="repuesto" EntityType="Self.repuesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ruta" EntityType="Self.ruta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vehiculo" EntityType="Self.vehiculo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__consumo_c__id_mo__47DBAE45" Association="Self.FK__consumo_c__id_mo__47DBAE45">
+            <End Role="monitoreo" EntitySet="monitoreo" />
+            <End Role="consumo_combustible" EntitySet="consumo_combustible" />
+          </AssociationSet>
+          <AssociationSet Name="FK__incidenci__id_mo__4BAC3F29" Association="Self.FK__incidenci__id_mo__4BAC3F29">
+            <End Role="monitoreo" EntitySet="monitoreo" />
+            <End Role="incidencia" EntitySet="incidencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__mantenimi__id_ve__4E88ABD4" Association="Self.FK__mantenimi__id_ve__4E88ABD4">
+            <End Role="vehiculo" EntitySet="vehiculo" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__monitoreo__id_co__440B1D61" Association="Self.FK__monitoreo__id_co__440B1D61">
+            <End Role="conductor" EntitySet="conductor" />
+            <End Role="monitoreo" EntitySet="monitoreo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__monitoreo__id_ru__44FF419A" Association="Self.FK__monitoreo__id_ru__44FF419A">
+            <End Role="ruta" EntitySet="ruta" />
+            <End Role="monitoreo" EntitySet="monitoreo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__monitoreo__id_ve__4316F928" Association="Self.FK__monitoreo__id_ve__4316F928">
+            <End Role="vehiculo" EntitySet="vehiculo" />
+            <End Role="monitoreo" EntitySet="monitoreo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__repuesto__id_pro__5441852A" Association="Self.FK__repuesto__id_pro__5441852A">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="repuesto" EntitySet="repuesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vehiculo__id_emp__3B75D760" Association="Self.FK__vehiculo__id_emp__3B75D760">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="vehiculo" EntitySet="vehiculo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="seguimiento_carga_anchaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="conductor">
+          <Key>
+            <PropertyRef Name="id_conductor" />
+          </Key>
+          <Property Name="id_conductor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="licencia" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="monitoreo" Relationship="Self.FK__monitoreo__id_co__440B1D61" FromRole="conductor" ToRole="monitoreo" />
+        </EntityType>
+        <EntityType Name="consumo_combustible">
+          <Key>
+            <PropertyRef Name="id_consumo" />
+          </Key>
+          <Property Name="id_consumo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_monitoreo" Type="Int32" />
+          <Property Name="cantidad_litros" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="costo_total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="monitoreo" Relationship="Self.FK__consumo_c__id_mo__47DBAE45" FromRole="consumo_combustible" ToRole="monitoreo" />
+        </EntityType>
+        <EntityType Name="empresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_empresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="razon_social" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ruc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vehiculo" Relationship="Self.FK__vehiculo__id_emp__3B75D760" FromRole="empresa" ToRole="vehiculo" />
+        </EntityType>
+        <EntityType Name="incidencia">
+          <Key>
+            <PropertyRef Name="id_incidencia" />
+          </Key>
+          <Property Name="id_incidencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_monitoreo" Type="Int32" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="monitoreo" Relationship="Self.FK__incidenci__id_mo__4BAC3F29" FromRole="incidencia" ToRole="monitoreo" />
+        </EntityType>
+        <EntityType Name="mantenimiento">
+          <Key>
+            <PropertyRef Name="id_mantenimiento" />
+          </Key>
+          <Property Name="id_mantenimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_vehiculo" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="costo" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="vehiculo" Relationship="Self.FK__mantenimi__id_ve__4E88ABD4" FromRole="mantenimiento" ToRole="vehiculo" />
+        </EntityType>
+        <EntityType Name="monitoreo">
+          <Key>
+            <PropertyRef Name="id_monitoreo" />
+          </Key>
+          <Property Name="id_monitoreo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_vehiculo" Type="Int32" />
+          <Property Name="id_conductor" Type="Int32" />
+          <Property Name="id_ruta" Type="Int32" />
+          <Property Name="fecha_salida" Type="DateTime" Precision="3" />
+          <Property Name="fecha_llegada" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="conductor" Relationship="Self.FK__monitoreo__id_co__440B1D61" FromRole="monitoreo" ToRole="conductor" />
+          <NavigationProperty Name="consumo_combustible" Relationship="Self.FK__consumo_c__id_mo__47DBAE45" FromRole="monitoreo" ToRole="consumo_combustible" />
+          <NavigationProperty Name="incidencia" Relationship="Self.FK__incidenci__id_mo__4BAC3F29" FromRole="monitoreo" ToRole="incidencia" />
+          <NavigationProperty Name="ruta" Relationship="Self.FK__monitoreo__id_ru__44FF419A" FromRole="monitoreo" ToRole="ruta" />
+          <NavigationProperty Name="vehiculo" Relationship="Self.FK__monitoreo__id_ve__4316F928" FromRole="monitoreo" ToRole="vehiculo" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="id_proveedor" />
+          </Key>
+          <Property Name="id_proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ruc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="repuesto" Relationship="Self.FK__repuesto__id_pro__5441852A" FromRole="proveedor" ToRole="repuesto" />
+        </EntityType>
+        <EntityType Name="repuesto">
+          <Key>
+            <PropertyRef Name="id_repuesto" />
+          </Key>
+          <Property Name="id_repuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_proveedor" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="stock" Type="Int32" />
+          <NavigationProperty Name="proveedor" Relationship="Self.FK__repuesto__id_pro__5441852A" FromRole="repuesto" ToRole="proveedor" />
+        </EntityType>
+        <EntityType Name="ruta">
+          <Key>
+            <PropertyRef Name="id_ruta" />
+          </Key>
+          <Property Name="id_ruta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="origen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="destino" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="distancia_km" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="monitoreo" Relationship="Self.FK__monitoreo__id_ru__44FF419A" FromRole="ruta" ToRole="monitoreo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="vehiculo">
+          <Key>
+            <PropertyRef Name="id_vehiculo" />
+          </Key>
+          <Property Name="id_vehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_empresa" Type="Int32" />
+          <Property Name="placa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="anio" Type="Int32" />
+          <Property Name="capacidad_toneladas" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="empresa" Relationship="Self.FK__vehiculo__id_emp__3B75D760" FromRole="vehiculo" ToRole="empresa" />
+          <NavigationProperty Name="mantenimiento" Relationship="Self.FK__mantenimi__id_ve__4E88ABD4" FromRole="vehiculo" ToRole="mantenimiento" />
+          <NavigationProperty Name="monitoreo" Relationship="Self.FK__monitoreo__id_ve__4316F928" FromRole="vehiculo" ToRole="monitoreo" />
+        </EntityType>
+        <Association Name="FK__monitoreo__id_co__440B1D61">
+          <End Role="conductor" Type="Self.conductor" Multiplicity="0..1" />
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conductor">
+              <PropertyRef Name="id_conductor" />
+            </Principal>
+            <Dependent Role="monitoreo">
+              <PropertyRef Name="id_conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__consumo_c__id_mo__47DBAE45">
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="0..1" />
+          <End Role="consumo_combustible" Type="Self.consumo_combustible" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monitoreo">
+              <PropertyRef Name="id_monitoreo" />
+            </Principal>
+            <Dependent Role="consumo_combustible">
+              <PropertyRef Name="id_monitoreo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vehiculo__id_emp__3B75D760">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="vehiculo" Type="Self.vehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="vehiculo">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__incidenci__id_mo__4BAC3F29">
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="0..1" />
+          <End Role="incidencia" Type="Self.incidencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monitoreo">
+              <PropertyRef Name="id_monitoreo" />
+            </Principal>
+            <Dependent Role="incidencia">
+              <PropertyRef Name="id_monitoreo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__mantenimi__id_ve__4E88ABD4">
+          <End Role="vehiculo" Type="Self.vehiculo" Multiplicity="0..1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehiculo">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__monitoreo__id_ru__44FF419A">
+          <End Role="ruta" Type="Self.ruta" Multiplicity="0..1" />
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ruta">
+              <PropertyRef Name="id_ruta" />
+            </Principal>
+            <Dependent Role="monitoreo">
+              <PropertyRef Name="id_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__monitoreo__id_ve__4316F928">
+          <End Role="vehiculo" Type="Self.vehiculo" Multiplicity="0..1" />
+          <End Role="monitoreo" Type="Self.monitoreo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehiculo">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="monitoreo">
+              <PropertyRef Name="id_vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__repuesto__id_pro__5441852A">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
+          <End Role="repuesto" Type="Self.repuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="repuesto">
+              <PropertyRef Name="id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="seguimiento_carga_anchaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="conductor" EntityType="Self.conductor" />
+          <EntitySet Name="consumo_combustible" EntityType="Self.consumo_combustible" />
+          <EntitySet Name="empresa" EntityType="Self.empresa" />
+          <EntitySet Name="incidencia" EntityType="Self.incidencia" />
+          <EntitySet Name="mantenimiento" EntityType="Self.mantenimiento" />
+          <EntitySet Name="monitoreo" EntityType="Self.monitoreo" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" />
+          <EntitySet Name="repuesto" EntityType="Self.repuesto" />
+          <EntitySet Name="ruta" EntityType="Self.ruta" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="vehiculo" EntityType="Self.vehiculo" />
+          <AssociationSet Name="FK__monitoreo__id_co__440B1D61" Association="Self.FK__monitoreo__id_co__440B1D61">
+            <End Role="conductor" EntitySet="conductor" />
+            <End Role="monitoreo" EntitySet="monitoreo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__consumo_c__id_mo__47DBAE45" Association="Self.FK__consumo_c__id_mo__47DBAE45">
+            <End Role="monitoreo" EntitySet="monitoreo" />
+            <End Role="consumo_combustible" EntitySet="consumo_combustible" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vehiculo__id_emp__3B75D760" Association="Self.FK__vehiculo__id_emp__3B75D760">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="vehiculo" EntitySet="vehiculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__incidenci__id_mo__4BAC3F29" Association="Self.FK__incidenci__id_mo__4BAC3F29">
+            <End Role="monitoreo" EntitySet="monitoreo" />
+            <End Role="incidencia" EntitySet="incidencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__mantenimi__id_ve__4E88ABD4" Association="Self.FK__mantenimi__id_ve__4E88ABD4">
+            <End Role="vehiculo" EntitySet="vehiculo" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__monitoreo__id_ru__44FF419A" Association="Self.FK__monitoreo__id_ru__44FF419A">
+            <End Role="ruta" EntitySet="ruta" />
+            <End Role="monitoreo" EntitySet="monitoreo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__monitoreo__id_ve__4316F928" Association="Self.FK__monitoreo__id_ve__4316F928">
+            <End Role="vehiculo" EntitySet="vehiculo" />
+            <End Role="monitoreo" EntitySet="monitoreo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__repuesto__id_pro__5441852A" Association="Self.FK__repuesto__id_pro__5441852A">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="repuesto" EntitySet="repuesto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="seguimiento_carga_anchaModelStoreContainer" CdmEntityContainer="seguimiento_carga_anchaEntities">
+          <EntitySetMapping Name="conductor">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.conductor">
+              <MappingFragment StoreEntitySet="conductor">
+                <ScalarProperty Name="id_conductor" ColumnName="id_conductor" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="licencia" ColumnName="licencia" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="consumo_combustible">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.consumo_combustible">
+              <MappingFragment StoreEntitySet="consumo_combustible">
+                <ScalarProperty Name="id_consumo" ColumnName="id_consumo" />
+                <ScalarProperty Name="id_monitoreo" ColumnName="id_monitoreo" />
+                <ScalarProperty Name="cantidad_litros" ColumnName="cantidad_litros" />
+                <ScalarProperty Name="costo_total" ColumnName="costo_total" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresa">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.empresa">
+              <MappingFragment StoreEntitySet="empresa">
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="razon_social" ColumnName="razon_social" />
+                <ScalarProperty Name="ruc" ColumnName="ruc" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="incidencia">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.incidencia">
+              <MappingFragment StoreEntitySet="incidencia">
+                <ScalarProperty Name="id_incidencia" ColumnName="id_incidencia" />
+                <ScalarProperty Name="id_monitoreo" ColumnName="id_monitoreo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantenimiento">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.mantenimiento">
+              <MappingFragment StoreEntitySet="mantenimiento">
+                <ScalarProperty Name="id_mantenimiento" ColumnName="id_mantenimiento" />
+                <ScalarProperty Name="id_vehiculo" ColumnName="id_vehiculo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="monitoreo">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.monitoreo">
+              <MappingFragment StoreEntitySet="monitoreo">
+                <ScalarProperty Name="id_monitoreo" ColumnName="id_monitoreo" />
+                <ScalarProperty Name="id_vehiculo" ColumnName="id_vehiculo" />
+                <ScalarProperty Name="id_conductor" ColumnName="id_conductor" />
+                <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+                <ScalarProperty Name="fecha_salida" ColumnName="fecha_salida" />
+                <ScalarProperty Name="fecha_llegada" ColumnName="fecha_llegada" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proveedor">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.proveedor">
+              <MappingFragment StoreEntitySet="proveedor">
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="ruc" ColumnName="ruc" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="repuesto">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.repuesto">
+              <MappingFragment StoreEntitySet="repuesto">
+                <ScalarProperty Name="id_repuesto" ColumnName="id_repuesto" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ruta">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.ruta">
+              <MappingFragment StoreEntitySet="ruta">
+                <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+                <ScalarProperty Name="origen" ColumnName="origen" />
+                <ScalarProperty Name="destino" ColumnName="destino" />
+                <ScalarProperty Name="distancia_km" ColumnName="distancia_km" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehiculo">
+            <EntityTypeMapping TypeName="seguimiento_carga_anchaModel.vehiculo">
+              <MappingFragment StoreEntitySet="vehiculo">
+                <ScalarProperty Name="id_vehiculo" ColumnName="id_vehiculo" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="capacidad_toneladas" ColumnName="capacidad_toneladas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,13 @@
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\obj\Debug\Evaluacion.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\obj\Debug\Evaluacion.Properties.Resources.resources
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\obj\Debug\Evaluacion.csproj.GenerateResource.cache
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\obj\Debug\Evaluacion.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\obj\Debug\Evaluacion.Form1.resources
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\bin\Debug\Evaluacion.exe.config
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\bin\Debug\Evaluacion.exe
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\bin\Debug\Evaluacion.pdb
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\bin\Debug\EntityFramework.dll
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\bin\Debug\EntityFramework.xml
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\obj\Debug\Evaluacion.csproj.Up2Date
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\obj\Debug\Evaluacion.exe
+C:\Users\Usuario\source\repos\Evaluacion\Evaluacion\obj\Debug\Evaluacion.pdb

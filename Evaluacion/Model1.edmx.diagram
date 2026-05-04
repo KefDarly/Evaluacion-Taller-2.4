@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b08718a5a004e1ea54e28872bc99b2f" Name="Diagram1">
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.conductor" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.consumo_combustible" Width="1.5" PointX="10.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.empresa" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.incidencia" Width="1.5" PointX="10.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.mantenimiento" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.monitoreo" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.proveedor" Width="1.5" PointX="8.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.repuesto" Width="1.5" PointX="11" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.ruta" Width="1.5" PointX="6" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="seguimiento_carga_anchaModel.vehiculo" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="seguimiento_carga_anchaModel.FK__monitoreo__id_co__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="seguimiento_carga_anchaModel.FK__consumo_c__id_mo__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="seguimiento_carga_anchaModel.FK__vehiculo__id_emp__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="seguimiento_carga_anchaModel.FK__incidenci__id_mo__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="seguimiento_carga_anchaModel.FK__mantenimi__id_ve__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="seguimiento_carga_anchaModel.FK__monitoreo__id_ru__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="seguimiento_carga_anchaModel.FK__monitoreo__id_ve__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="seguimiento_carga_anchaModel.FK__repuesto__id_pro__5441852A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
